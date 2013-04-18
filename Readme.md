@@ -3,7 +3,6 @@ Crispy Pear
 
 What is it ?
 ------------
-___
 Crispy Pear is a javascript library to build games using HTML5 canvas. It is designed to be easy to integrate and to use.
 
 It takes its inspirations from frameworks like [Corona SDK](http://www.coronalabs.com/products/corona-sdk/) or [Unity 3D](http://unity3d.com/).
@@ -11,37 +10,31 @@ It takes its inspirations from frameworks like [Corona SDK](http://www.coronalab
 
 Code Layout
 ------------
-> CrispyPear
-> |-- CPDemo
->    |-- images 					# Images used for the demo project
->    |-- scripts 					# Scripts used for the demo project (not including this lib)
->    |-- index.html 				# The main html file
->    |-- style.css 					# Some stylesheet
-> |-- CPActionCanvas.js				# Responsible for mouse events
-> |-- CPButton.js				# Responsible for mouse events
-> |-- CPDisplayGroup.js				# Responsible for mouse events
-> |-- CPSceneManager.js				# Responsible for mouse events
-> |-- CPImage.js				# Responsible for mouse events
-> |-- CPGame.js				# Responsible for mouse events
-> |-- CPDisplayObject.js				# Responsible for mouse events
-> |-- CPSprite.js				# Responsible for mouse events
-> |-- CPText.js				# Responsible for mouse events
-> |-- CPLayer.js				# Responsible for mouse events
-> |-- CPUtils.js				# Responsible for mouse events
-> |-- CPScene.js				# Responsible for mouse events
-> |-- CPResourceManager.js				# Responsible for mouse events
-> |-- CPDebug.js				# Responsible for mouse events
-> |-- CPParticle.js				# Responsible for mouse events
-> |-- CPParticleManager.js				# Responsible for mouse events
-> |-- CPParticleEmitter.js				# Responsible for mouse events
-> |-- CPDisplayObject.js				# Responsible for mouse events
-> |-- CPDisplayObject.js				# Responsible for mouse events
-> |-- Readme.md 					# This readme
-> |-- settings.json 				# Game settings
+    CrispyPear
+    |-- CPDemo
+       |-- images 					# Images used for the demo project
+       |-- scripts 					# Scripts used for the demo project (not including this lib)
+       |-- index.html 				# The main html file
+       |-- style.css 				# Some stylesheet
+    |-- CPActionCanvas.js			# Responsible for mouse events
+    |-- CPButton.js					# Button display object
+    |-- CPDisplayGroup.js			# Responsible for actions on grouped object
+    |-- CPSceneManager.js			# Responsible for all game loop
+    |-- CPImage.js					# Image display object
+    |-- CPGame.js					# Globals
+    |-- CPDisplayObject.js			# Base display object. Shouldn't be instanciated
+    |-- CPSprite.js					# Animated sprite display object
+    |-- CPText.js					# Text display object
+    |-- CPLayer.js					# Layer (added canvas) that can handle display objects
+    |-- CPUtils.js					# Utils method
+    |-- CPScene.js					# Scene graph, can handle layers
+    |-- CPResourceManager.js		# Responsible for loading resources once (loading callbacks,...)
+    |-- CPDebug.js					# Debug methods
+    |-- Readme.md 					# This readme
+    |-- settings.json 				# Game settings
 
 External tools that can also help you to make games :
 -----------------------------------------------------
-_ _ _
 
 * The [Spritools](http://jeremy.gabriele.free.fr/SpriteViewer/) enable you to :
 > - Check if your spritesheet are running fine
