@@ -127,11 +127,7 @@ CPSceneManager.prototype.update = function (){
         this.timeLastFrame = time;
         // console.log(dt);
 
-        CPGame.instance.fps = 1/dt;
-
-        if (dt > 1/20) {
-            console.error("HEY !");
-        }
+        //CPGame.instance.fps = 1/dt;
 
         // call current scene's update(dt)
         if (this.currentScene) {

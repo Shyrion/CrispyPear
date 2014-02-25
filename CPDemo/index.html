@@ -54,8 +54,6 @@
 		// Chrome do not allow CORS request to file:///, so use plzupload :).
 		new CPGame("http://plzupload.fruitygames.fr/nouja.json", function(cpGame) {
 		//new CPGame("settings.json", function(cpGame) {
-			
-			console.log("CALLBACK", cpGame);
 
 			var onResourcesLoaded = function() {
         console.log('Resources loaded !');
