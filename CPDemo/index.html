@@ -2,52 +2,78 @@
 <head>
 	<title></title>
 	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="width:100%; height:100%">
 
-	<div id="game_div" style="border: 1px solid black; margin:auto; width:480px; height:320px;"></div>
+	<div id="game_div"></div>
 
 	<!-- // <script src="scripts/lib/mootools-core-1.4.1-full-compat-yc.js"></script> -->
-	<script src="scripts/lib/PxLoader.js"></script>
-	<script src="scripts/lib/PxLoaderImage.js"></script>
-	<script src="scripts/lib/PxLoaderSound.js"></script>
+	<script src="scripts/CrispyPear/lib/PxLoader-min.js"></script>
 
-	<script src="../CPUtils.js"></script>
+	<script src="scripts/CrispyPear/CPUtils.js"></script>
 
-	<script src="../CPDisplayObject.js"></script>
-	<script src="../CPImage.js"></script>
-	<script src="../CPSprite.js"></script>
-	<script src="../CPText.js"></script>
-	<script src="../CPDisplayGroup.js"></script>
-	<script src="../CPButton.js"></script>
+	<script src="scripts/CrispyPear/CPDisplayObject.js"></script>
+	<script src="scripts/CrispyPear/CPImage.js"></script>
+	<script src="scripts/CrispyPear/CPSprite.js"></script>
+	<script src="scripts/CrispyPear/CPText.js"></script>
+	<script src="scripts/CrispyPear/CPDisplayGroup.js"></script>
+	<script src="scripts/CrispyPear/CPButton.js"></script>
 
-	<script src="../CPActionCanvas.js"></script>
+	<script src="scripts/CrispyPear/CPActionCanvas.js"></script>
 
-	<script src="../CPSceneManager.js"></script>
-	<script src="../CPResourceManager.js"></script>
-	<script src="../CPGame.js"></script>
-	<!-- // <script src="../TransitionManager.js"></script> -->
-	<!-- // <script src="../TimerManager.js"></script> -->
+	<script src="scripts/CrispyPear/CPSceneManager.js"></script>
+	<script src="scripts/CrispyPear/CPResourceManager.js"></script>
+	<script src="scripts/CrispyPear/CPGame.js"></script>
+	<!-- // <script src="scripts/CrispyPear/TransitionManager.js"></script> -->
+	<!-- // <script src="scripts/CrispyPear/TimerManager.js"></script> -->
 
-	<script src="../CPLayer.js"></script>
-	<script src="../CPScene.js"></script>
+	<script src="scripts/CrispyPear/CPLayer.js"></script>
+	<script src="scripts/CrispyPear/CPScene.js"></script>
 
-	<!-- <script src="../CPParticleManager.js"></script>
-	// <script src="../CPParticleEmitter.js"></script>
-	// <script src="../CPParticle.js"></script> -->
+	<!-- <script src="scripts/CrispyPear/CPParticleManager.js"></script>
+	// <script src="scripts/CrispyPear/CPParticleEmitter.js"></script>
+	// <script src="scripts/CrispyPear/CPParticle.js"></script> -->
 
-	<!-- // <script src="../SimplifiedPhysics.js"></script> -->
+	<!-- // <script src="scripts/CrispyPear/SimplifiedPhysics.js"></script> -->
 
-	<!-- // <script src="../CPDebug.js"></script> -->
+	<!-- // <script src="scripts/CrispyPear/CPDebug.js"></script> -->
 
-	<!-- <script src="../AAClassTemplate.js"></script>
-	// <script src="../AAChildClassTemplate.js"></script> -->
+	<!-- <script src="scripts/CrispyPear/AAClassTemplate.js"></script>
+	// <script src="scripts/CrispyPear/AAChildClassTemplate.js"></script> -->
 
 	<script src="scripts/scenes/DemoScene.js"></script>
 	<script src="scripts/objects/Player.js"></script>
 	<script src="scripts/scenes/SpritesheetScene.js"></script>
 	<script src="scripts/scenes/BasicsScene.js"></script>
 	<script src="scripts/scenes/GameScene.js"></script>
+
+
+	<script type="text/javascript">
+
+		// Chrome do not allow CORS request to file:///, so use plzupload :).
+		new CPGame("http://plzupload.fruitygames.fr/nouja.json", function(cpGame) {
+		//new CPGame("settings.json", function(cpGame) {
+			
+			console.log("CALLBACK", cpGame);
+
+			var onResourcesLoaded = function() {
+        console.log('Resources loaded !');
+        
+	      // Launch 1rst scene
+	      CPSceneManager.instance.setScene("DemoScene");
+	    }.bind(this)
+	    var onResourcesProgress = function(progress) {
+	        console.log(progress + '%');
+	    }
+
+	    CPResourceManager.instance.init(cpGame.allImages, onResourcesLoaded,
+	      onResourcesProgress);
+
+	    CPResourceManager.instance.startLoading();
+		})
+
+	</script>
 
 </body>
 </html>

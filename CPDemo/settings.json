@@ -1,0 +1,30 @@
+{
+	"parentDiv": "game_div",
+	"canvasSize": {
+		"width": "max",
+		"height": "max"
+	},
+
+	"allImages": [
+    { "imageName": "titleBG", "imagePath": "images/bg.png" },
+
+    { "imageName": "bg", "imagePath": "images/bg.png" },
+    { "imageName": "front", "imagePath": "images/front.png" },
+    { "imageName": "middlebg", "imagePath": "images/middlebg.png" },
+    { "imageName": "middlefront", "imagePath": "images/middlefront.png" },
+    { "imageName": "nocBreathSprite", "imagePath": "images/nocBreathSprite.png" },
+    { "imageName": "nocBreathSprite2", "imagePath": "images/nocBreathSprite2.png" },
+    { "imageName": "nocRunSprite", "imagePath": "images/nocRunSprite.png" },
+    { "imageName": "nocKirby", "imagePath": "images/nocKirby.png" },
+    { "imageName": "selector", "imagePath": "images/selector.png" },
+    { "imageName": "hero", "imagePath": "images/hero.png" },
+    { "imageName": "monster", "imagePath": "images/monster.png" },
+    { "imageName": "playButton", "imagePath": "images/buttons/playButton.png" },
+    { "imageName": "playButton_over", "imagePath": "images/buttons/playButton_over.png" },
+    { "imageName": "playButton_touched", "imagePath": "images/buttons/playButton_touched.png" },
+    { "imageName": "topArrow", "imagePath": "images/icons/topArrow.png" },
+    { "imageName": "bottomArrow", "imagePath": "images/icons/bottomArrow.png" },
+    { "imageName": "leftArrow", "imagePath": "images/icons/leftArrow.png" },
+    { "imageName": "rightArrow", "imagePath": "images/icons/rightArrow.png" }
+  ]
+}
