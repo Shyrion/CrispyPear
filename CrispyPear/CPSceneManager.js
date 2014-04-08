@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2012  Jérémy Gabriele
+    Copyright (C) 2012  Jeremy Gabriele
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,7 +59,7 @@ var CPSceneManager = function () {
 
 
     // Handle tabs (from tab bar) state
-    focusActive = function focusActive() {
+    /*focusActive = function focusActive() {
         this.resumeScene();
     }.bind(this);
 
@@ -75,7 +75,7 @@ var CPSceneManager = function () {
     } else {
         window.onfocus = focusActive;
         window.onblur = focusDesactive;
-    }
+    }*/
 
     this.update();
 }
@@ -117,7 +117,7 @@ CPSceneManager.prototype.invalidate = function (ctx) {
     The game loop
 */
 CPSceneManager.prototype.update = function (){
-    window.requestAnimFrame(function(time){
+    window.requestAnimationFrame(function(time){
 
         if (this.paused) return;
 
@@ -127,11 +127,7 @@ CPSceneManager.prototype.update = function (){
         this.timeLastFrame = time;
         // console.log(dt);
 
-        CPGame.instance.fps = 1/dt;
-
-        if (dt > 1/20) {
-            console.error("HEY !");
-        }
+        //CPGame.instance.fps = 1/dt;
 
         // call current scene's update(dt)
         if (this.currentScene) {

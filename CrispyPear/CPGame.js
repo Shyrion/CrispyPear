@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2011  Jérémy Gabriele
+    Copyright (C) 2011  Jeremy Gabriele
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,69 +15,67 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-CPGame = function () {
+var DEFAULT_CANVAS_WIDTH = 480;
+var DEFAULT_CANVAS_HEIGHT = 320;
+var DEFAULT_PARENT_DIV = "game_div";
 
-    this.canvasWidth = 480;
-    this.canvasHeight = 320;
+CPGame = function (settings, callback) {
 
-    this.firstSceneName = 'DemoScene';
+    function configureFromSettings(settings) {
+      if (settings.canvasSize) {
+        if (settings.canvasSize.width == 'max') {
+          this.canvasWidth = document.body.clientWidth;
+        } else {
+          this.canvasWidth = settings.canvasSize.width || DEFAULT_CANVAS_WIDTH;
+        }
 
-    // this.transitionManager = new CPTransitionManager();
+        if (settings.canvasSize.height == 'max') {
+          this.canvasHeight = document.body.clientHeight;
+        } else {
+        this.canvasHeight = settings.canvasSize.height || DEFAULT_CANVAS_HEIGHT;
+        }
+      }
 
-    var onResourcesLoaded = function() {
-        console.log('Resources loaded !');
-        this.startGame(this.firstSceneName);
-    }.bind(this)
-    var onResourcesProgress = function(progress) {
-        // console.log(progress + '%');
+      this.allImages = settings.allImages;
+
+      this.parentDiv = settings.parentDiv || DEFAULT_PARENT_DIV;
     }
 
-    var allImages = [
-      { imageName: "titleBG", imagePath: "images/bg.png" },
+    if (typeof(settings) == "string") {
+      // Async get all settings
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', settings);
 
-      { imageName: "bg", imagePath: 'images/bg.png' },
-      { imageName: "front", imagePath: 'images/front.png' },
-      { imageName: "middlebg", imagePath: 'images/middlebg.png' },
-      { imageName: "middlefront", imagePath: 'images/middlefront.png' },
-      { imageName: "nocBreathSprite", imagePath: 'images/nocBreathSprite.png' },
-      { imageName: "nocBreathSprite2", imagePath: 'images/nocBreathSprite2.png' },
-      { imageName: "nocRunSprite", imagePath: 'images/nocRunSprite.png' },
-      { imageName: "nocKirby", imagePath: 'images/nocKirby.png' },
-      { imageName: "selector", imagePath: 'images/selector.png' },
-      { imageName: "hero", imagePath: 'images/hero.png' },
-      { imageName: "monster", imagePath: 'images/monster.png' },
-      { imageName: "playButton", imagePath: 'images/buttons/playButton.png' },
-      { imageName: "playButton_over", imagePath: 'images/buttons/playButton_over.png' },
-      { imageName: "playButton_touched", imagePath: 'images/buttons/playButton_touched.png' },
-      { imageName: "topArrow", imagePath: 'images/icons/topArrow.png' },
-      { imageName: "bottomArrow", imagePath: 'images/icons/bottomArrow.png' },
-      { imageName: "leftArrow", imagePath: 'images/icons/leftArrow.png' },
-      { imageName: "rightArrow", imagePath: 'images/icons/rightArrow.png' }
-    ];
+      xhr.onerror = function() {
+        console.log("error");
+      };
 
-    CPResourceManager.instance.init(allImages, onResourcesLoaded,
-      onResourcesProgress);
+      var self = this;
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState==4) {
+          if (xhr.status==200) {
+            
+            var response = JSON.parse(this.responseText);
 
-    CPResourceManager.instance.startLoading();
+            configureFromSettings.call(self, response);
 
-    if (window.XMLHttpRequest) {
-        // request = new XMLHttpRequest();
-        // request.open("GET", "settings.json", true);
+            if (callback) callback(self);
+          } else {
+            console.log("Error while loading settings. Cannot do much more :/.");
+          }
+        }
+      }
+
+      xhr.send();
     } else {
-        console.error("No XMLHttpRequest available :/.")
+      configureFromSettings.call(this, settings);
+      if (callback) callback(this);
     }
+
+    CPGame._instance = this;
 }
 
 /*
     Singleton instance
 */
 CPGame.defineSingleton();
-CPGame.instance;
-
-CPGame.prototype.startGame = function (firstSceneName) {
-    if (firstSceneName) {
-      CPSceneManager.instance.setScene(firstSceneName);
-    }
-    else
-        console.error("No first scene given");
-}

@@ -20,14 +20,14 @@
 	Used in CPSceneManager.js
 */
 window.requestAnimFrame = (function(){
-	// return  window.requestAnimationFrame       || 
+	return  window.requestAnimationFrame 
 	// 		window.webkitRequestAnimationFrame || 
 	// 		window.mozRequestAnimationFrame    || 
 	// 		window.oRequestAnimationFrame      || 
 	// 		window.msRequestAnimationFrame     || 
-			return function(callback){
+			/*return function(callback){
 				window.setTimeout(callback, 1000 / 60);
-			};
+			};*/
 })();
 
 /*

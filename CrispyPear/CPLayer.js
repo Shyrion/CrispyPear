@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2012  Jérémy Gabriele
+    Copyright (C) 2012  Jeremy Gabriele
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,17 +15,20 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var CPLayer = function (zIndex, parentName){
+var CPLayer = function (zIndex, parentName) {
+    
     this.canvas = document.createElement('canvas');
     this.canvas.style.position = 'absolute';
     this.canvas.style.zIndex = zIndex;
     this.canvas.width = CPGame.instance.canvasWidth;
     this.canvas.height = CPGame.instance.canvasHeight;
-    document.id(parentName || 'game_div').appendChild(this.canvas);
+    document.id(CPGame.instance.parentDiv).appendChild(this.canvas);
 
     this.context = this.canvas.getContext('2d');
 
     this.displayGroup = new CPDisplayGroup();
+    this.displayGroup.canvas = this.canvas;
+    this.displayGroup.context = this.context;
 }
 
 /*

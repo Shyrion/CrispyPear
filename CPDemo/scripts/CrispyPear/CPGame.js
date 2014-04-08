@@ -19,53 +19,58 @@ var DEFAULT_CANVAS_WIDTH = 480;
 var DEFAULT_CANVAS_HEIGHT = 320;
 var DEFAULT_PARENT_DIV = "game_div";
 
-CPGame = function (settingPath, callback) {
+CPGame = function (settings, callback) {
 
-    // Async get all settings
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', settingPath);
-
-    console.log(settingPath);
-
-    xhr.onerror = function() {
-      console.log("error");
-    };
-
-    var self = this;
-    xhr.onreadystatechange=function() {
-      if (xhr.readyState==4) {
-        if (xhr.status==200 || xhr.status==0) { // REMOVE LAST ONE, ONLY FOR TEST on FF !
-          console.log(this.responseText);
-          var response = JSON.parse(this.responseText);
-
-          console.log(response);
-
-          if (response.canvasSize) {
-            if (response.canvasSize.width == 'max') {
-              self.canvasWidth = document.body.clientWidth;
-            } else {
-              self.canvasWidth = response.canvasSize.width || DEFAULT_CANVAS_WIDTH;
-            }
-
-            if (response.canvasSize.height == 'max') {
-              self.canvasHeight = document.body.clientHeight;
-            } else {
-            self.canvasHeight = response.canvasSize.height || DEFAULT_CANVAS_HEIGHT;
-            }
-          }
-
-          self.allImages = response.allImages;
-
-          self.parentDiv = response.parentDiv || DEFAULT_PARENT_DIV;
-
-          if (callback) callback(self);
+    function configureFromSettings(settings) {
+      if (settings.canvasSize) {
+        if (settings.canvasSize.width == 'max') {
+          this.canvasWidth = document.body.clientWidth;
         } else {
-          console.log("Error while loading settings. Cannot do much more :/.");
+          this.canvasWidth = settings.canvasSize.width || DEFAULT_CANVAS_WIDTH;
+        }
+
+        if (settings.canvasSize.height == 'max') {
+          this.canvasHeight = document.body.clientHeight;
+        } else {
+        this.canvasHeight = settings.canvasSize.height || DEFAULT_CANVAS_HEIGHT;
         }
       }
+
+      this.allImages = settings.allImages;
+
+      this.parentDiv = settings.parentDiv || DEFAULT_PARENT_DIV;
     }
 
-    xhr.send();
+    if (typeof(settings) == "string") {
+      // Async get all settings
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', settings);
+
+      xhr.onerror = function() {
+        console.log("error");
+      };
+
+      var self = this;
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState==4) {
+          if (xhr.status==200) {
+            
+            var response = JSON.parse(this.responseText);
+
+            configureFromSettings.call(self, response);
+
+            if (callback) callback(self);
+          } else {
+            console.log("Error while loading settings. Cannot do much more :/.");
+          }
+        }
+      }
+
+      xhr.send();
+    } else {
+      configureFromSettings.call(this, settings);
+      if (callback) callback(this);
+    }
 
     CPGame._instance = this;
 }

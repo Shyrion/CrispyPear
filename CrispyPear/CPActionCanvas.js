@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2012  Jérémy Gabriele
+    Copyright (C) 2012  Jeremy Gabriele
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 var CPActionCanvas = function (width, height) {
     this.canvas = document.createElement('canvas');
-    document.id('game_div').appendChild(this.canvas);
+    document.id(CPGame.instance.parentDiv).appendChild(this.canvas);
 
     // function getOffset( el ) {
     //     var _x = 0;

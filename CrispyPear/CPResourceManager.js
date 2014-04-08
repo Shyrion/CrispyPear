@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2011  Jérémy Gabriele, Romaric Pighetti, Wiz
+    Copyright (C) 2011  Jeremy Gabriele, Romaric Pighetti, Wiz
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -59,7 +59,7 @@ var CPSceneManager = function () {
 
 
     // Handle tabs (from tab bar) state
-    focusActive = function focusActive() {
+    /*focusActive = function focusActive() {
         this.resumeScene();
     }.bind(this);
 
@@ -75,7 +75,7 @@ var CPSceneManager = function () {
     } else {
         window.onfocus = focusActive;
         window.onblur = focusDesactive;
-    }
+    }*/
 
     this.update();
 }
@@ -117,7 +117,7 @@ CPSceneManager.prototype.invalidate = function (ctx) {
     The game loop
 */
 CPSceneManager.prototype.update = function (){
-    window.requestAnimFrame(function(time){
+    window.requestAnimationFrame(function(time){
 
         if (this.paused) return;
 

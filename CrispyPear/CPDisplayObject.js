@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2012  Jérémy Gabriele
+Copyright (C) 2012  Jeremy Gabriele
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -75,13 +75,18 @@ var CPDisplayObject = function (params) {
 	this.alpha = 1;
 
 	function scaleChanged(newScale) {
+		// Reset the sites to 100%
 		this.width *= 1/this._scale;
 		this.height *= 1/this._scale;
 
+		// Update scale
 		this._scale = newScale;
 
+		// Apply it to width and height
 		this.width *= this._scale;
 		this.height *= this._scale;
+
+		//this.anchor = this.anchor; // Need to update _anchorOffsets
 	}
 	Object.defineProperty(this, 'scale', {
 		get : function() { return this._scale; },
@@ -94,8 +99,8 @@ var CPDisplayObject = function (params) {
 		if (params.y) this.y = params.y;
 		if (params.width) this.width = params.width;
 		if (params.height) this.height = params.height;
-		if (typeof(params.anchor) != 'undefined') this.anchor = params.anchor;
 		if (params.scale) this.scale = params.scale;
+		if (typeof(params.anchor) != 'undefined') this.anchor = params.anchor;
 	}
 }
 
@@ -114,7 +119,7 @@ CPDisplayObject.prototype.prepareDraw = function () {
 	var posX = this.x+this._anchorOffsetX;
 	var posY = this.y+this._anchorOffsetY;
 
-    this.context.globalAlpha = this.alpha;
+  this.context.globalAlpha = this.alpha;
 
 	if (this.flipX) {
 	  this.context.scale(-1, 1);
